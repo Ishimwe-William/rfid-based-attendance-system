@@ -4,10 +4,10 @@ import com.bunsen.rfidbasedattendancesystem.repository.model.Attendance;
 import com.bunsen.rfidbasedattendancesystem.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class AttendanceController {
@@ -17,8 +17,10 @@ public class AttendanceController {
     public AttendanceController(AttendanceService attendanceService) {
         this.attendanceService = attendanceService;
     }
-    @RequestMapping(path = "/")
-    public String index(){
+    @GetMapping("/")
+    public String index(Model model) {
+        List<Attendance> data = attendanceService.getAllAttendancesSortedByCreated();
+        model.addAttribute("attendances", data);
         return "index";
     }
 

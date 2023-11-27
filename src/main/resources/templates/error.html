@@ -1,1 +1,29 @@
-Error
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Error</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
+    <th:block th:insert="layout/header"></th:block>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron mt-5 text-center">
+        <h1 class="display-4">Oops!</h1>
+        <p class="lead">
+            <span class="font-weight-bold" th:text="${error.code}"></span>
+            <span class="mx-2">-</span>
+            <span th:text="${error.message}"></span>
+        </p>
+        <p class="lead" th:unless="${error.message}">Unknown error message</p>
+        <p class="text-muted">
+            Something wrong! Get in touch with the site engineers.
+        </p>
+        <hr class="my-4">
+        <a class="btn btn-outline-info" href="/" th:href="@{/}" role="button">Home</a>
+    </div>
+</div>
+</body>
+</html>

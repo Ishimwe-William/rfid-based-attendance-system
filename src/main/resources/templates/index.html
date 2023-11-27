@@ -2,10 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Product - Spring MVC Application</title>
-    <th:block th:include="layout/header"></th:block>
+    <title>Attendance - Home</title>
+    <th:block th:insert="layout/header"></th:block>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Card Number</th>
+        <th>Time in</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="attendance : ${attendances}">
+        <td th:text="${attendance.id}"></td>
+        <td th:text="${attendance.cardNo}"></td>
+        <td th:text="${#temporals.format(attendance.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <!-- Add other data fields as needed -->
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

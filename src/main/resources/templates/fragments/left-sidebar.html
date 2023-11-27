@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="left-sidebar-content" class="col-sm-2">
+    <h3>Payments</h3>
+    <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Recent Payments</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Thymeleaf template to display recent payments -->
+            <div th:if="${not #lists.isEmpty(payments)}">
+                <ul>
+                    <li th:each="payment : ${payments}">
+                        <p>
+                            Student Name: <span th:text="${payment.student.firstName + ' ' + payment.student.lastName}"></span>
+                            Payment Amount: <span th:text="${payment.amount}"></span>
+                            Payment Date: <span th:text="${#temporals.format(payment.created, 'yyyy-MM-dd')}"></span>
+                            <!-- Add more details or actions as needed -->
+                            <a th:href="@{/payments/view/{id}(id=${payment.id})}" class="btn btn-link">View</a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${#lists.isEmpty(payments)}">
+                <p>No recent payments found!</p>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="button" onclick="loadRecentPayments()" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+        <h3>Recent Payments</h3>
+    </button>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function loadRecentPayments() {
+            // Make an AJAX request to fetch recent payments
+            $.ajax({
+                url: '/payments/recent',
+                method: 'GET',
+                success: function (data) {
+                    // Update the recentPaymentsContainer with the fetched recent payments
+                    $('#recentPaymentsContainer').html(data);
+                },
+                error: function () {
+                    // Handle error (display an error message, etc.)
+                    console.log('Error fetching recent payments');
+                }
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

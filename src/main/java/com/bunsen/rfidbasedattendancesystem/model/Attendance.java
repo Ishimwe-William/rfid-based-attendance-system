@@ -1,6 +1,5 @@
-package com.bunsen.rfidbasedattendancesystem.repository.model;
+package com.bunsen.rfidbasedattendancesystem.model;
 
-import com.sun.jdi.Locatable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

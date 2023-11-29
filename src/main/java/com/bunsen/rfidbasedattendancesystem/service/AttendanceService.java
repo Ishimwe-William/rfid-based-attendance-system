@@ -1,7 +1,7 @@
 package com.bunsen.rfidbasedattendancesystem.service;
 
 import com.bunsen.rfidbasedattendancesystem.repository.AttendanceRepo;
-import com.bunsen.rfidbasedattendancesystem.repository.model.Attendance;
+import com.bunsen.rfidbasedattendancesystem.model.Attendance;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class AttendanceService {
 
     public List<Attendance> getAllAttendancesSortedByCreated() {
         Sort sortByCreatedDesc = Sort.by(Sort.Direction.DESC, "created");
-        List<Attendance> attendances = repo.findAll(sortByCreatedDesc);
+        List<Attendance>attendances = repo.findAll(sortByCreatedDesc);
         return attendances;
     }
 

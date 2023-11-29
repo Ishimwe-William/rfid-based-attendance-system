@@ -1,4 +1,4 @@
-package com.bunsen.rfidbasedattendancesystem.repository.model;
+package com.bunsen.rfidbasedattendancesystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

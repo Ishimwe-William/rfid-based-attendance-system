@@ -1,6 +1,6 @@
 package com.bunsen.rfidbasedattendancesystem.controller;
 
-import com.bunsen.rfidbasedattendancesystem.repository.model.Attendance;
+import com.bunsen.rfidbasedattendancesystem.model.Attendance;
 import com.bunsen.rfidbasedattendancesystem.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

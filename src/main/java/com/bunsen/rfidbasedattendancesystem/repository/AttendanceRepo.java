@@ -1,6 +1,6 @@
 package com.bunsen.rfidbasedattendancesystem.repository;
 
-import com.bunsen.rfidbasedattendancesystem.repository.model.Attendance;
+import com.bunsen.rfidbasedattendancesystem.model.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

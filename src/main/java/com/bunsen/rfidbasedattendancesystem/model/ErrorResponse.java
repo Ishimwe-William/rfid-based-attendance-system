@@ -1,4 +1,4 @@
-package com.bunsen.rfidbasedattendancesystem.errors;
+package com.bunsen.rfidbasedattendancesystem.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

@@ -3,6 +3,7 @@ package com.bunsen.rfidbasedattendancesystem.controller;
 import com.bunsen.rfidbasedattendancesystem.model.Attendance;
 import com.bunsen.rfidbasedattendancesystem.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class AttendanceController {
-    private AttendanceService attendanceService;
+    private final AttendanceService attendanceService;
     private boolean arduinoConnected = false; // Flag to track Arduino connection status
     private long lastArduinoCommunicationTime = System.currentTimeMillis();
     private static final long MAX_INACTIVITY_PERIOD = 1000; // Maximum inactivity period in milliseconds (adjust as needed)
@@ -23,18 +24,28 @@ public class AttendanceController {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Attendance> data = attendanceService.getAllAttendancesSortedByCreated();
-        model.addAttribute("attendances", data);
+        return findPaginated(1, model);
+    }
+
+    @GetMapping("/home/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 10;
         updateConnectionStatus();
 
         // Convert arduinoConnected to a string attribute
         String connectionStatus = arduinoConnected ? "Connected" : "Not Connected";
 
+        Page<Attendance> page = attendanceService.findPaginated(pageNo, pageSize);
+        List<Attendance> attendances = page.getContent();
+
         model.addAttribute("arduinoConnected", connectionStatus);
         model.addAttribute("connectionColor", arduinoConnected ? "green" : "red");
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("attendances", attendances);
         return "index";
     }
-
 
     @PostMapping("/sensor-data")
     public String postData(@RequestParam("card_number") String card_no) {

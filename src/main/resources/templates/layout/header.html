@@ -1,54 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+
 <head>
-<!--    <script>-->
-<!--        function myFunction() {-->
-<!--            let element = document.body;-->
-<!--            let selectedTheme = element.dataset.bsTheme;-->
-<!--            let newTheme = selectedTheme === "dark" ? "light" : "dark";-->
-
-<!--            // Save the selected theme in local storage-->
-<!--            localStorage.setItem("bsTheme", newTheme);-->
-
-<!--            // Set the theme on the page-->
-<!--            element.dataset.bsTheme = newTheme;-->
-<!--        }-->
-
-<!--        // Function to set the initial theme on page load-->
-<!--        window.onload = function() {-->
-<!--            // Retrieve the selected theme from local storage-->
-<!--            let savedTheme = localStorage.getItem("bsTheme") || "light";-->
-
-<!--            // Set the theme on the page-->
-<!--            document.body.dataset.bsTheme = savedTheme;-->
-<!--        };-->
-<!--    </script>-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
     <!-- Custom CSS -->
+
 </head>
+
 <body>
+
 <header>
     <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
             <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}" href="/">
+                <a class="navbar-brand" th:href="@{/}">
                     <img src="/static/img/rfid-logo.png" alt="RFID Logo" width="30" height="30"
                          th:src="@{/img/rfid-logo.png}"/>
+                    Home
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<!--                    <div class="form-check form-switch mx-4">-->
-<!--                        <label for="darkLightModeSwitch">Dark/Light</label>-->
-<!--                        <input class="form-check-input p-2" type="checkbox" role="switch"-->
-<!--                               id="darkLightModeSwitch" checked onclick="myFunction()"/>-->
-<!--                    </div>-->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" sec:authorize="isAnonymous()">
                     <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/register}" href="#">Register</a>
@@ -56,6 +37,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/login}" href="#">Sign In</a>
                         </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="loginNavbarSupportedContent" sec:authorize="not isAnonymous()">
+                    <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/logout}" href="#">Logout</a>
                         </li>
@@ -65,6 +50,7 @@
         </nav>
     </div>
 </header>
+
 <main>
     <div class="jumbotron">
         <div class="container text-center">
@@ -74,5 +60,7 @@
         </div>
     </div>
 </main>
+
 </body>
+
 </html>

@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,29 +25,35 @@ public class SpringSecurity {
     }
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers(
+                        "/resources/**", "/static/**", "/webjars/**", "/css/**", "/js/**",
+                        "/img/**", "/jquery/**").permitAll()
+                .requestMatchers("/register/**", "/", "/sensor-data", "/connection-status"
+                        , "/err", "/home/**").permitAll()
+                .requestMatchers("/users/**").hasRole("ADMIN")
+        ).formLogin(
+                form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/users")
+                        .permitAll()
+        ).logout(
+                logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .deleteCookies()
+                        .permitAll()
+        );
         http.authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/css/**", "/js/**","/img/**","/jquery/**", "/webjars/**").permitAll()
-                                .requestMatchers("/").permitAll()
-                                .requestMatchers("/connection-status").permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
-                ).formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );
+                        authorize
+                                .anyRequest().permitAll())
+                .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
@@ -58,3 +64,4 @@ public class SpringSecurity {
                 .passwordEncoder(passwordEncoder());
     }
 }
+

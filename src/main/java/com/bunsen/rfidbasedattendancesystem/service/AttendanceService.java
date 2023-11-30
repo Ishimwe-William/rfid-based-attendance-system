@@ -2,6 +2,9 @@ package com.bunsen.rfidbasedattendancesystem.service;
 
 import com.bunsen.rfidbasedattendancesystem.repository.AttendanceRepo;
 import com.bunsen.rfidbasedattendancesystem.model.Attendance;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +28,8 @@ public class AttendanceService {
         return attendances;
     }
 
+    public Page<Attendance> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return repo.findPaginated(pageable);
+    }
 }

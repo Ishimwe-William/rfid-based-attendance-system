@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Attendance - Home</title>
@@ -7,7 +8,8 @@
     <!-- Include jQuery from WebJars -->
     <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"
+          crossorigin="anonymous"/>
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css"/>
 </head>
@@ -15,7 +17,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2">
-            Menu
+
         </div>
         <div class="col-sm-10">
             <hr/>
@@ -44,14 +46,23 @@
                     <td th:text="${attendance.id}"></td>
                     <td th:text="${attendance.cardNo}"></td>
                     <td th:text="${#temporals.format(attendance.created, 'EEE dd MMM, yyyy HH:mm:ss')}"></td>
-                    <!-- Add other data fields as needed -->
+                    <td><a th:href="@{/home/showFormForUpdate/{id}(id=${attendance.id})}"
+                           class="btn btn-primary">Update</a>
+                        <a th:href="@{/home/deleteEmployee/{id}(id=${attendance.id})}" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
+
+            <ul class="pagination">
+                <li th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{'/home/' + ${i}}" class="page-link">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}" class="page-link">[[${i}]]</span> &nbsp; &nbsp;
+                </li>
+            </ul>
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function () {
         // Cache the jQuery selector
@@ -78,6 +89,7 @@
         setInterval(updateConnectionStatus, 1000);
     });
 </script>
-
+<div th:insert="layout/footer"></div>
 </body>
 </html>
+

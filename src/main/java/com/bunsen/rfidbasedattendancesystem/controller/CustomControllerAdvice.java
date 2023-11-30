@@ -1,5 +1,6 @@
-package com.bunsen.rfidbasedattendancesystem.errors;
+package com.bunsen.rfidbasedattendancesystem.controller;
 
+import com.bunsen.rfidbasedattendancesystem.model.ErrorResponse;
 import exceptions.CustomDataNotFoundException;
 import exceptions.CustomErrorException;
 import exceptions.CustomParameterConstraintException;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-@Controller // Change annotation
+@Controller
 @ControllerAdvice
 class CustomControllerAdvice {
     @ExceptionHandler(CustomDataNotFoundException.class)
@@ -25,7 +26,7 @@ class CustomControllerAdvice {
         e.printStackTrace(printWriter);
         String stackTrace = stringWriter.toString();
 
-        model.addAttribute("error", new ErrorResponse(status, e.getMessage(), stackTrace));
+        model.addAttribute("err", new ErrorResponse(status, e.getMessage(), stackTrace));
         return "error"; // Assuming you have an error.html template
     }
 
@@ -33,7 +34,7 @@ class CustomControllerAdvice {
     public String handleCustomParameterConstraintExceptions(Exception e, Model model) {
         HttpStatus status = HttpStatus.BAD_REQUEST; // 400
 
-        model.addAttribute("error", new ErrorResponse(status, e.getMessage()));
+        model.addAttribute("err", new ErrorResponse(status, e.getMessage()));
         return "error"; // Assuming you have an error.html template
     }
 
@@ -50,7 +51,7 @@ class CustomControllerAdvice {
         customErrorException.printStackTrace(printWriter);
         String stackTrace = stringWriter.toString();
 
-        model.addAttribute("error", new ErrorResponse(status, customErrorException.getMessage(), stackTrace, customErrorException.getData()));
+        model.addAttribute("err", new ErrorResponse(status, customErrorException.getMessage(), stackTrace, customErrorException.getData()));
         return "error"; // Assuming you have an error.html template
     }
 
@@ -67,7 +68,7 @@ class CustomControllerAdvice {
         e.printStackTrace(printWriter);
         String stackTrace = stringWriter.toString();
 
-        model.addAttribute("error", new ErrorResponse(status, e.getMessage(), stackTrace));
+        model.addAttribute("err", new ErrorResponse(status, e.getMessage(), stackTrace));
         return "error"; // Assuming you have an error.html template
     }
 }

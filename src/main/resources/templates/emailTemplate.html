@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Message From Thymeleaf</title>
+</head>
+<body>
+<div>
+    <img src="../image/Spring-MVC-Tutorial.png" alt="RBAS logo"/>
+    <h2>Welcome to <span th:text="${sender}"></span></h2>
+    <br/>
+    <p><span th:text="${body}"></span></p>
+    <address>Regards,<br/> </address>
+
+</div>
+</body>
+</html>

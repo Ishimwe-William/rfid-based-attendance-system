@@ -2,7 +2,9 @@ package com.bunsen.rfidbasedattendancesystem.controller;
 
 import com.bunsen.rfidbasedattendancesystem.model.User;
 import com.bunsen.rfidbasedattendancesystem.model.UserDto;
+import com.bunsen.rfidbasedattendancesystem.service.EmailService;
 import com.bunsen.rfidbasedattendancesystem.service.UserService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class AuthController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     // handler method to handle user registration form request
@@ -35,8 +40,9 @@ public class AuthController {
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
-                               Model model){
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
+                               Model model) throws MessagingException {
+        String newUserEmail = userDto.getEmail();
+        User existingUser = userService.findUserByEmail(newUserEmail);
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
@@ -49,6 +55,13 @@ public class AuthController {
         }
 
         userService.saveUser(userDto);
+        //send email
+        emailService.prepareAndSendEmail(userDto.getEmail(),"RBAS Admin",
+                "WELCOME TO RBAS",
+                "Thanks for Registering to RFID Based Attendance System");
+        emailService.prepareAndSendEmail("bunsenplus.org@gmail.com","RBAS Admin",
+                "New Registered User",
+                "Email: "+newUserEmail+"\nDate: "+new Date());
         return "redirect:/register?success";
     }
 

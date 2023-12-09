@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Details</title>
+    <th:block th:insert="layout/header"></th:block>
+    <!-- Include jQuery from WebJars -->
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"
+          crossorigin="anonymous"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+</head>
+<body>
+
+<div class="container">
+    <h2>Attendance Details</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <!--            <th>ID</th>-->
+            <th>Card Number</th>
+            <th>User Name</th>
+            <th>Time In</th>
+            <th>Roles</th>
+            <!-- Add more columns as needed -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!--            <td th:text="${attendance.id}"></td>-->
+            <td th:text="${attendance.card.cardNumber}"></td>
+            <td th:text="${attendance.card.user.name}"></td>
+            <td th:text="${#temporals.format(attendance.created, 'EEE dd MMM, yyyy HH:mm:ss')}"></td>
+            <td>
+                <ul th:if="${attendance.card.user.roles != null}">
+                    <li th:each="role : ${attendance.card.user.roles}" th:text="${role.name}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Add any additional information or controls as needed -->
+</div>
+
+</body>
+</html>

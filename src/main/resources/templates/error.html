@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Application Error</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
-    <th:block th:insert="layout/header"></th:block>
-</head>
-<body>
-<div class="container">
-    <div class="jumbotron mt-5 text-center">
-        <h1 class="display-4" th:text="${err.status} ?: 'Error'"></h1>
-        <p class="lead" th:if="${err.message}">
-            <span th:text="${err.message}"></span>
-        </p>
-        <p class="lead" th:unless="${err.message}"> An unknown error occurred. </p>
-        <p class="text-muted"> Something went wrong! Our engineers have been informed. </p>
-        <hr class="my-4">
-        <a class="btn btn-outline-secondary" onclick="window.history.back();"> Go Back </a>
-        <a class="btn btn-outline-info" href="/" th:href="@{/}"> Home </a>
-        <div th:if="${log}">
-            <p class="text-muted"> Error has been logged (ID: <span th:text="${log.id}"></span>)
-        </p>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Application Error</title>-->
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">-->
+<!--    <th:block th:insert="layout/header"></th:block>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div class="jumbotron mt-5 text-center">-->
+<!--        <h1 class="display-4" th:text="${err.status} ?: 'Error'"></h1>-->
+<!--        <p class="lead" th:if="${err.message}">-->
+<!--            <span th:text="${err.message}"></span>-->
+<!--        </p>-->
+<!--        <p class="lead" th:unless="${err.message}"> An unknown error occurred. </p>-->
+<!--        <p class="text-muted"> Something went wrong! Our engineers have been informed. </p>-->
+<!--        <hr class="my-4">-->
+<!--        <a class="btn btn-outline-secondary" onclick="window.history.back();"> Go Back </a>-->
+<!--        <a class="btn btn-outline-info" href="/" th:href="@{/}"> Home </a>-->
+<!--        <div th:if="${log}">-->
+<!--            <p class="text-muted"> Error has been logged (ID: <span th:text="${log.id}"></span>)-->
+<!--        </p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

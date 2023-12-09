@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AttendanceService {
@@ -31,5 +32,20 @@ public class AttendanceService {
     public Page<Attendance> findPaginated(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return repo.findPaginated(pageable);
+    }
+
+    public List<Attendance> getLatestRecords(int count) {
+        Sort sortByCreatedDesc = Sort.by(Sort.Direction.DESC, "created");
+        Pageable pageable = PageRequest.of(0, count, sortByCreatedDesc);
+        return repo.findPaginated(pageable).getContent();
+    }
+    // Provide a default value for count to fetch all latest records
+    public List<Attendance> getLatestRecords() {
+        // Set a default count value or use Integer.MAX_VALUE to get all records
+        return getLatestRecords(Integer.MAX_VALUE);
+    }
+
+    public Optional<Attendance> findById(String id) {
+        return repo.findById(id);
     }
 }

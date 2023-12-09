@@ -1,17 +1,13 @@
 package com.bunsen.rfidbasedattendancesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Setter
-@Getter
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table(name="roles")
 public class Role
@@ -23,6 +19,7 @@ public class Role
     @Column(nullable=false, unique=true)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy="roles")
     private List<User> users;
 }

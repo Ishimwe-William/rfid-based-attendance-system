@@ -1,76 +1,67 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Static Navbar</title>
     <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS and JS -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}" media="screen"/>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"media="screen"/>
 </head>
 <body>
 <footer class="footer bg-dark text-light text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 footer-column">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <span class="footer-title">Company</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4 footer-column">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <span class="footer-title">Contact & Support</span>
-                    </li>
-                    <li class="nav-item">
-                        <span class="nav-link"><i class="fas fa-phone"></i>+47 45 80 80 80</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fas fa-envelope"></i>Contact us</a>
-                    </li>
-                </ul>
+    <div class="container justify-content-center">
+        <div class="row text-center">
+            <div class="col-md-12 box">
+                <span>
+                    <hr/>
+                </span>
             </div>
         </div>
-
-        <div class="text-center"><i class="fas fa-ellipsis-h"></i></div>
-
         <div class="row text-center">
-            <div class="col-md-4 box">
-<span class="copyright quick-links">&copy; <script>document.write(new Date().getFullYear())</script> Bunsen RFID Based Attendance System</span>
-            </div>
-            <div class="col-md-4 box">
+            <div class="col-md-12 box">
+                <span class="footer-title">Follow Us</span>
                 <ul class="list-inline social-buttons">
                     <li class="list-inline-item">
-                        <a href="/">
+                        <a href="https://twitter.com/WilliamIshimwe" target="_blank">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="/">
-                            <i class="fab fa-facebook-f"></i>
+                        <a href="https://www.facebook.com/BunsenPlus.org/" target="_blank">
+                            <i class="fab fa-facebook-f fa-lg"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="/">
+                        <a href="https://www.linkedin.com/in/ishimwe-william-086776192/" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Ishimwe-William/" target="_blank">
+                            <i class="fab fa-github"></i>
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-4 box">
-                <ul class="list-inline quick-links">
-                    <li class="list-inline-item">
-                        <a href="/">Privacy Policy</a>
-                    </li>
-                </ul>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12 box">
+                <span class="copyright quick-links">&copy; <script>document.write(new Date().getFullYear())</script> Bunsen RFID Based Attendance System</span>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12 box">
+                <span>
+                    <hr/>
+                </span>
             </div>
         </div>
     </div>
 </footer>
 </body>
 </html>
+

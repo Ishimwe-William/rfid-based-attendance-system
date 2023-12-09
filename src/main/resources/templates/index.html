@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
@@ -36,19 +36,19 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>ID</th>
+<!--                    <th>ID</th>-->
                     <th>Card Number</th>
                     <th>Time in</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="attendanceTableBody">
                 <tr th:each="attendance : ${attendances}">
-                    <td th:text="${attendance.id}"></td>
-                    <td th:text="${attendance.cardNo}"></td>
+<!--                    <td th:text="${attendance.id}"></td>-->
+                    <td th:if="${attendance.card != null}" th:text="${attendance.card.cardNumber}"></td>
                     <td th:text="${#temporals.format(attendance.created, 'EEE dd MMM, yyyy HH:mm:ss')}"></td>
-                    <td><a th:href="@{/home/showFormForUpdate/{id}(id=${attendance.id})}"
-                           class="btn btn-primary">Update</a>
-                        <a th:href="@{/home/deleteEmployee/{id}(id=${attendance.id})}" class="btn btn-danger">Delete</a>
+                    <td><a th:href="@{/home/showFormForView/{id}(id=${attendance.id})}"
+                           class="btn btn-primary">View</a>
                     </td>
                 </tr>
                 </tbody>
@@ -85,8 +85,37 @@
             });
         }
 
-        // Periodically update connection status every 1 second
+// Function to fetch and update the attendance records
+        function updateTable() {
+            $.ajax({
+                type: 'GET',
+                url: '/home/latestRecords', // Update this URL based on your controller mapping
+                success: function (data) {
+                    // Update the table rows with the new data
+                    let tableBody = $('#attendanceTableBody');
+                    tableBody.empty();
+
+                    $.each(data, function (index, attendance) {
+                        let row = '<tr>' +
+                            // '<td>' + attendance.id + '</td>' +
+                            '<td>' + (attendance.card ? attendance.card.cardNumber : '') + '</td>' +
+                            '<td>' + attendance.formattedDate + '</td>' +
+                            '<td><a href="/home/showFormForView/' + attendance.id + '" class="btn btn-primary">View</a></td>' +
+                            '</tr>';
+                        tableBody.append(row);
+                    });
+                }
+            });
+        }
+
+        // Periodically update connection status every 1000 millisecond
         setInterval(updateConnectionStatus, 1000);
+
+        // Update the table initially
+        updateTable();
+
+        // Periodically update records every 5 seconds (adjust as needed)
+        setInterval(updateTable, 5000);
     });
 </script>
 <div th:insert="layout/footer"></div>

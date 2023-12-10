@@ -37,7 +37,7 @@ public class SpringSecurity {
                         "/img/**", "/jquery/**").permitAll()
                 .requestMatchers("/register/**", "/", "/sensor-data", "/connection-status"
                         , "/err", "/home/**").permitAll()
-                .requestMatchers("/users/**").hasRole("ADMIN")
+                .requestMatchers("/users/**").hasAnyRole("ADMIN","USER")
         ).formLogin(
                 form -> form
                         .loginPage("/login")

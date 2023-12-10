@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,59 +8,82 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
     <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"media="screen"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}" media="screen"/>
+
+    <!-- Add the following style for flexbox and spacing -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+            margin-bottom: 20px; /* Adjust spacing as needed */
+        }
+
+        footer {
+            width: 100%;
+        }
+
+        .footer-content {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .social-buttons {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-buttons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-title {
+            font-weight: bold;
+        }
+
+        .copyright {
+            margin-top: 10px; /* Add some spacing above the copyright */
+        }
+    </style>
 </head>
 <body>
+<main role="main" class="flex-shrink-0">
+    <!-- Include the content of your page -->
+</main>
+
 <footer class="footer bg-dark text-light text-center">
-    <div class="container justify-content-center">
-        <div class="row text-center">
-            <div class="col-md-12 box">
-                <span>
-                    <hr/>
-                </span>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-12 box">
-                <span class="footer-title">Follow Us</span>
-                <ul class="list-inline social-buttons">
-                    <li class="list-inline-item">
-                        <a href="https://twitter.com/WilliamIshimwe" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.facebook.com/BunsenPlus.org/" target="_blank">
-                            <i class="fab fa-facebook-f fa-lg"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.linkedin.com/in/ishimwe-william-086776192/" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://github.com/Ishimwe-William/" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-12 box">
-                <span class="copyright quick-links">&copy; <script>document.write(new Date().getFullYear())</script> Bunsen RFID Based Attendance System</span>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-12 box">
-                <span>
-                    <hr/>
-                </span>
-            </div>
-        </div>
+    <div class="container footer-content">
+        <span class="footer-title">Follow Us</span>
+        <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+                <a href="https://twitter.com/WilliamIshimwe" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.facebook.com/BunsenPlus.org/" target="_blank">
+                    <i class="fab fa-facebook-f fa-lg"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/ishimwe-william-086776192/" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://github.com/Ishimwe-William/" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+        </ul>
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Bunsen RFID Based Attendance System</p>
     </div>
 </footer>
 </body>
 </html>
-

@@ -24,10 +24,11 @@
             <div>
                 <nav>
                     <div class="navbar">
-            <span class="navbar-brand mb-0 h1 connection-status">
-                RFID Reader Connection Status:
-                <span id="arduinoStatus" th:text="${arduinoConnected}"></span>
-            </span>
+                        <span class="navbar-brand mb-0 h1 connection-status"
+                              th:class="${arduinoConnected == 'Connected' ? 'text-success' : 'text-danger'}">
+                            RFID Reader:
+                            <span id="arduinoStatus" th:text="${arduinoConnected}"></span>
+                        </span>
                     </div>
                 </nav>
             </div>

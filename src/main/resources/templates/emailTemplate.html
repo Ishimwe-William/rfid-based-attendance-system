@@ -2,17 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Email Message From Thymeleaf</title>
+    <title>Welcome to RBAS</title>
 </head>
-<body>
-<div>
-    <img src="../image/Spring-MVC-Tutorial.png" alt="RBAS logo"/>
-    <h2>Welcome to <span th:text="${sender}"></span></h2>
-    <br/>
-    <p><span th:text="${body}"></span></p>
-    <address>Regards,<br/> </address>
+<body style="font-family: Arial, sans-serif;">
 
+<div style="text-align: center;">
+    <!-- RBAS Logo -->
+    <img src="cid:rbasLogo" alt="RBAS logo" style="max-width: 100%; height: auto;"/>
+
+    <!-- Welcome Message -->
+    <h2>Welcome to RFID-Based Attendance System (RBAS)</h2>
+
+    <!-- Email Body -->
+    <p>
+        <span th:text="${body}"></span>
+    </p>
+
+    <!-- Closing Message -->
+    <p>
+        If you have any questions or need assistance, feel free to reach out.
+        <br/>
+        Regards,
+        <br/>
+        RBAS
+    </p>
 </div>
-<div class="mb-0" th:insert="layout/footer"></div>
+
 </body>
 </html>

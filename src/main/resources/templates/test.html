@@ -1,114 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap Static Navbar</title>
-  <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+  <title>Pin Verification Result</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}" media="screen"/>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"
+        crossorigin="anonymous"/>
   <!-- Custom CSS -->
   <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css"/>
 </head>
-<body>
-<footer class="footer bg-dark text-light text-center">
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 footer-column">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <span class="footer-title">Product</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Product 1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Product 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Plans & Prices</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Frequently asked questions</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4 footer-column">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <span class="footer-title">Company</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Job postings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">News and articles</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4 footer-column">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <span class="footer-title">Contact & Support</span>
-        </li>
-        <li class="nav-item">
-          <span class="nav-link"><i class="fas fa-phone"></i>+47 45 80 80 80</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-comments"></i>Live chat</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-envelope"></i>Contact us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-star"></i>Give feedback</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="text-center"><i class="fas fa-ellipsis-h"></i></div>
-
-  <div class="row text-center">
-    <div class="col-md-4 box">
-<span class="copyright quick-links">Copyright &copy; Your Website <script>document.write(new Date().getFullYear())</script>
-</span>
-    </div>
-    <div class="col-md-4 box">
-      <ul class="list-inline social-buttons">
-        <li class="list-inline-item">
-          <a href="#">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a href="#">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4 box">
-      <ul class="list-inline quick-links">
-        <li class="list-inline-item">
-          <a href="#">Privacy Policy</a>
-        </li>
-        <li class="list-inline-item">
-          <a href="#">Terms of Use</a>
-        </li>
-      </ul>
+<body class="bg-light">
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Pin Verification Result</h2>
+      <p class="card-text">Email: <span th:text="${email}"></span></p>
+      <p class="card-text" th:if="${isPinValid}">PIN is valid!</p>
+      <p class="card-text" th:unless="${isPinValid}">Invalid PIN. Please try again.</p>
     </div>
   </div>
 </div>
-</footer>
+<script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.6.4/jquery.slim.min.js}" crossorigin="anonymous"></script>
+<script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" crossorigin="anonymous"></script>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" crossorigin="anonymous"></script>
 </body>
 </html>

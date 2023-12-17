@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <th:block th:insert="layout/header"></th:block>
+    <!-- Include jQuery from WebJars -->
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+</head>
+<body>
+<br/><br/><br/>
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Registration</h2>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You have successfully registered our app!
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="post" role="form" th:action="@{/register/send-pin}" th:object="${user}">
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input class="form-control" id="firstName" name="firstName" placeholder="Enter first name"
+                               th:field="${user.firstName}" type="text"/>
+                        <p th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="${user.firstName}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input class="form-control" id="lastName" name="lastName" placeholder="Enter last name"
+                               th:field="${user.lastName}" type="text"/>
+                        <p th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="${user.lastName}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control" id="email" name="email" placeholder="Enter email address"
+                               th:field="${user.email}" type="email"/>
+                        <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="${user.email}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control" id="password" name="password" placeholder="Enter password"
+                               th:field="${user.password}" type="password"/>
+                        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="${user.password}"></p>
+                    </div>
+
+                    <!-- Display PIN error message -->
+                    <div th:if="${pinError}" class="alert alert-danger">
+                        <p th:text="${pinError}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="layout/footer"></div>
+</body>
+</html>

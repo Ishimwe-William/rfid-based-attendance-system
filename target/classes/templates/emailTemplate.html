@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to RBAS</title>
+</head>
+<body style="font-family: Arial, sans-serif;">
+
+<div style="text-align: center;">
+    <!-- RBAS Logo -->
+    <img src="cid:rbasLogo" alt="RBAS logo" style="max-width: 100%; height: auto;"/>
+
+    <!-- Welcome Message -->
+    <h2>Welcome to RFID-Based Attendance System (RBAS)</h2>
+
+    <!-- Email Body -->
+    <p>
+        <span th:text="${body}"></span>
+    </p>
+
+    <!-- Closing Message -->
+    <p>
+        If you have any questions or need assistance, feel free to reach out.
+        <br/>
+        Regards,
+        <br/>
+        RBAS
+    </p>
+</div>
+
+</body>
+</html>

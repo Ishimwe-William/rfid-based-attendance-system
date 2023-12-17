@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" media="screen"/>
+
+    <style>
+        .navbar-nav.right-side {
+            margin-right: 20px; /* Adjust the margin as needed */
+        }
+
+        body {
+            padding-top: 56px; /* Adjust this value based on your navbar height */
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+
+<header>
+    <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> <!-- Add the fixed-top class here -->
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img src="/static/img/rfid-logo.png" alt="RFID Logo" width="30" height="30"
+                         th:src="@{/img/rfid-logo.png}"/>
+                    Home
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navigation links for anonymous users -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" sec:authorize="!isAuthenticated()">
+                    <ul class="ms-auto navbar-nav mb-2 mb-lg-0 right-side"> <!-- Add the custom class here -->
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/register}" href="#">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/login}" href="#">Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Navigation link for authenticated users -->
+                <div class="collapse navbar-collapse" id="loginNavbarSupportedContent"
+                     sec:authorize="isAuthenticated()">
+                    <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
+                        <!-- Conditionally show these links for users with ROLE_ADMIN -->
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="nav-link active" th:href="@{/associateCardWithUser}" href="#">Associate Card</a>
+                        </li>
+                        <!-- Conditionally show the link for users with ROLE_ADMIN or ROLE_USER -->
+                        <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                            <a class="nav-link active" th:href="@{/users}" href="#">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/logout}" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Display username or 'GUEST' with white text -->
+            <div th:if="${#authorization.expression('isAuthenticated()')}" class="text-white ms-1"
+                 style="margin-right: 20px;">
+                <span th:text="${#authentication.principal.username}"></span>
+            </div>
+            <div th:unless="${#authorization.expression('isAuthenticated')}" class="text-white"
+                 style="margin-right: 20px;">
+                <span>GUEST</span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h2>Bunsen RFID Based Attendance System</h2>
+            <img src="/static/img/rfid_header_photo.png" alt="RFID Header" width="1000" height="30"
+                 th:src="@{/img/rfid_header_photo.png}"/>
+        </div>
+    </div>
+</main>
+
+</body>
+
+</html>
